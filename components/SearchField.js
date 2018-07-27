@@ -30,7 +30,7 @@ export default class SearchField extends React.Component {
           onChangeText={text => this.setState({ text })}
           onClear={() => this.setState({ text: '' })}
           onFocus={this.onFocusSearchBar}
-          placeholder="Type Here..."
+          placeholder="求人を検索してみましょう"
         />
         <SearchInfo
           renderItem={({ item, index, section }) => (
