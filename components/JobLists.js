@@ -1,8 +1,10 @@
 import React from 'react';
 import { Text, Animated, Easing } from 'react-native';
-import SearchField from './SearchField';
 import styled from 'styled-components';
 import Dimensions from 'Dimensions';
+
+import SearchField from './SearchField';
+import JobItem from './JobItem';
 
 export default class JobLists extends React.Component {
   state = {
@@ -16,7 +18,7 @@ export default class JobLists extends React.Component {
     Animated.timing(this.state.jobListPosition, {
       toValue: 60,
       duration: 500,
-      easing: Easing.ease
+      easing: Easing.back()
     }).start();
   };
 
@@ -26,7 +28,7 @@ export default class JobLists extends React.Component {
     Animated.timing(this.state.jobListPosition, {
       toValue: Dimensions.get('window').height,
       duration: 500,
-      easing: Easing.ease
+      easing: Easing.back()
     }).start();
   };
 
@@ -43,7 +45,7 @@ export default class JobLists extends React.Component {
           style={[animatedStyle]}
           searchBarActive={this.state.searchBarActive}
           data={[{ key: 'a' }, { key: 'b' }]}
-          renderItem={({ item }) => <Text>{item.key}</Text>}
+          renderItem={({ item }) => <JobItem />}
         />
       </JobListsWrapper>
     );
@@ -56,10 +58,11 @@ const JobListsWrapper = styled.View`
 
 const JobList = styled.FlatList`
   position: absolute;
-  height: 100%;
+  height: ${Dimensions.get('window').height - 160}px;
   width: 100%;
-  border-radius: 16px;
-  background-color: #fff;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  background-color: #ddd;
 `;
 
 const AnimatedJobList = Animated.createAnimatedComponent(JobList);
